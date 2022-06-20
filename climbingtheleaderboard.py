@@ -1,6 +1,3 @@
-from audioop import reverse
-
-
 def climbingLeaderboard(ranked,player):
   #check if the ranked leader board is valid
   comparingString = ranked.copy()
