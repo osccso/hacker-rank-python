@@ -5,21 +5,24 @@ def climbingLeaderboard(ranked,player):
   length = len(ranked)
   if comparingString != ranked :
     return print('String not properly ranked')
+  #creates the ranks for the ranked matrix
+  rankedMatrix = []
+  track = float('inf')
+  rank = 0
+  for score in ranked :
+    if score < track:
+      rank +=1
+      track = score
+    rankedMatrix.append(rank)
   #this is where the positions for the array are going be stored
   ranks = []
   for score in player :
       for index,registered_score in enumerate(ranked) :
-        if index == 0 :
-          rank = 1
-        else :
-          if registered_score < ranked[index-1]:
-            rank += 1
         if score >= registered_score :
-          ranks.append(rank)
+          ranks.append(rankedMatrix[index])
           break
         if score < registered_score and length == index+1:
-          rank +=1
-          ranks.append(rank)
+          ranks.append(rankedMatrix[index]+1)
       
   return ranks
 
