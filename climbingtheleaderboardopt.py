@@ -1,5 +1,5 @@
 import time
-from climbingtheleaderboarddataheavy import *
+from climbingtheleaderboarddata import *
 #optimized using different for loops
 #instead of using append using extend instead
 def climbingLeaderboard(ranked,player):

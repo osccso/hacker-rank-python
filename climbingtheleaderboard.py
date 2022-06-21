@@ -1,6 +1,6 @@
 import time
 # from climbingtheleaderboarddata import *
-from climbingtheleaderboarddata import *
+from climbingtheleaderboarddataheavy import *
 
 def climbingLeaderboard(ranked,player):
   #check if the ranked leader board is valid
