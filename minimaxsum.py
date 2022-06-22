@@ -4,5 +4,14 @@ def miniMaxSum(arr):
   for num in arr:
     #copy the array
     ArrayCopy = [*arr]
+    #removing the element
     ArrayCopy.remove(num)
-    sum(ArrayCopy)
+    #calculating sum
+    sumValue = sum(ArrayCopy)
+    #evaluating conditions
+    if sumValue < minSum :
+      minSum = sumValue
+    if sumValue > maxSum :
+      maxSum = sumValue
+  print(minSum,maxSum)
+  return
