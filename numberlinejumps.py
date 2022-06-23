@@ -5,6 +5,9 @@ def kangaroo(x1,v1,x2,v2):
   positionKangaroo2 = x2
   answer = 'NO'
   if v1 > v2:
-    answer = 'YES'
-  
+    while positionKangaroo1 <= positionKangaroo2:
+      if positionKangaroo1 == positionKangaroo2:
+        answer = 'YES'
+      positionKangaroo1 += v1
+      positionKangaroo2 += v2 
   return answer
