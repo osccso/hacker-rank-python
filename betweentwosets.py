@@ -10,3 +10,4 @@ def getTotalX(a,b):
     sumB = sum([i%num for i in b])
     if sumA == 0 and sumB == 0:
       count += 1
+  return count
