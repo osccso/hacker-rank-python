@@ -16,3 +16,35 @@
 
 #and finally there are six ways a set can be arranged in the magic square
 #three of them correspond to row direction and the other three correspond to column direction
+
+#the total of magic squares we have is 6 x 2 x 6 = 72
+
+#preallocating the array  
+from copy import copy
+
+
+magicSquares = [[[0,0,0],[0,0,0],[0,0,0]]]*72
+seed  = [[1,6,8],[9,2,4],[5,7,3]]
+seedT = [[1,9,5],[6,2,7],[8,4,3]]
+
+
+def permute(seed):
+  #columns flag == 'col'
+  for column1 in range(0,3):
+    for column2 in range(column1+1,3):
+      copyseed = []
+      [copyseed.append([*row]) for row in seed]
+      temp = []
+      for index in range(0,3):
+        temp.append(copyseed[index][column1])
+        copyseed[index][column1] = copyseed[index][column2]
+      
+      for index in range(0,3):
+        copyseed[index][column2] = temp[index]
+      
+
+def magicSqGen(result):
+  # this is the base
+  result[0] = [[1,6,8],[9,2,4],[5,7,3]]
+  #now you create the other magic squares just through permutation
+  
