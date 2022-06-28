@@ -22,14 +22,36 @@
 #preallocating the array  
 from copy import copy
 
-magicSquares = [[[0,0,0],[0,0,0],[0,0,0]]]*72
-seed  = [[1,6,8],[9,2,4],[5,7,3]]
-seedT = [[1,9,5],[6,2,7],[8,4,3]]
+from numpy import diff
 
-def permute(seed,array):
-  #columns flag == 'col'
+seedGiven  = [[1,6,8],[9,2,4],[5,7,3]]
+seedTrans = [[1,9,5],[6,2,7],[8,4,3]]
+set = [0,1,2]
+
+def permute(seed,set,array):
   for column in range(0,3):
-    #for every column in the given seed we generate
+    #for every column in the given seed we generate the corresponding permutations
+    set1 = [*set]
+    set2 = [*set]
+    different = list(filter(lambda x : x != column,set))
+    for num in set:
+      if num != column :
+        set1[num] = list(filter(lambda x : x == num),different)[0]
+        set2[num] = list(filter(lambda x : x != num),different)[0]
+    #now you do the permutation
+    perm1 = [[0,0,0]]*3 
+    perm2 = [[0,0,0]]*3
+    for r in seed :
+      for c,value in enumerate(set1) :
+        perm1[r][c] = seed[r][value]
+    for r in seed :
+      for c,value in enumerate(set2) :
+        perm2[r][c] = seed[r][value]
+    #you append the two magic squares
+    array.append(perm1)
+    array.append(perm2)
+    
+    
 
 def magicSqGen(result):
   # this is the base
