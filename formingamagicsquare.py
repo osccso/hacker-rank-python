@@ -22,26 +22,14 @@
 #preallocating the array  
 from copy import copy
 
-
 magicSquares = [[[0,0,0],[0,0,0],[0,0,0]]]*72
 seed  = [[1,6,8],[9,2,4],[5,7,3]]
 seedT = [[1,9,5],[6,2,7],[8,4,3]]
 
-
-def permute(seed):
+def permute(seed,array):
   #columns flag == 'col'
-  for column1 in range(0,3):
-    for column2 in range(column1+1,3):
-      copyseed = []
-      [copyseed.append([*row]) for row in seed]
-      temp = []
-      for index in range(0,3):
-        temp.append(copyseed[index][column1])
-        copyseed[index][column1] = copyseed[index][column2]
-      
-      for index in range(0,3):
-        copyseed[index][column2] = temp[index]
-      
+  for column in range(0,3):
+    #for every column in the given seed we generate
 
 def magicSqGen(result):
   # this is the base
