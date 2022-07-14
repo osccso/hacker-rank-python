@@ -19,42 +19,84 @@
 
 #the total of magic squares we have is 6 x 2 x 6 = 72
 
-#preallocating the array  
-from copy import copy
 
-from numpy import diff
+                
 
-seedGiven  = [[1,6,8],[9,2,4],[5,7,3]]
-seedTrans = [[1,9,5],[6,2,7],[8,4,3]]
-set = [0,1,2]
-
-def permute(seed,set,array):
-  for column in range(0,3):
-    #for every column in the given seed we generate the corresponding permutations
-    set1 = [*set]
-    set2 = [*set]
-    different = list(filter(lambda x : x != column,set))
-    for num in set:
-      if num != column :
-        set1[num] = list(filter(lambda x : x == num),different)[0]
-        set2[num] = list(filter(lambda x : x != num),different)[0]
-    #now you do the permutation
-    perm1 = [[0,0,0]]*3 
-    perm2 = [[0,0,0]]*3
-    for r in seed :
-      for c,value in enumerate(set1) :
-        perm1[r][c] = seed[r][value]
-    for r in seed :
-      for c,value in enumerate(set2) :
-        perm2[r][c] = seed[r][value]
-    #you append the two magic squares
-    array.append(perm1)
-    array.append(perm2)
-    
-    
-
-def magicSqGen(result):
-  # this is the base
-  result[0] = [[1,6,8],[9,2,4],[5,7,3]]
-  #now you create the other magic squares just through permutation
+def formingMagicSquare(s):
   
+  def magic_squares_generator(seed):
+    #you take a row and column with a common element as reference an from there you start generating all the different magic squares
+    
+    def column_permutation(array_2d):
+        permutations = []
+        for index in range(0,3):
+            generated_array = []
+            generated_array_reversed = []
+            for row in array_2d:
+                copy_row = row[index:] + row[:index]
+                generated_array.append(copy_row)
+            
+            permutations.append(generated_array)
+            for row in generated_array:
+                copy_row = [num for num in reversed(row)]
+                generated_array_reversed.append(copy_row)
+            permutations.append(generated_array_reversed)
+        
+        return permutations
+      
+    def row_permutation(array_2d):
+        permutations = []
+        for index in range(0,3):
+            generated_array = array_2d[index:] + array_2d[:index]
+            permutations.append(generated_array)
+            generated_array = [row for row in reversed(generated_array)]
+            permutations.append(generated_array)
+        return permutations
+    
+    def transpose(args):
+      transpose_array = []
+      for array in args:
+          new_array = [[0,0,0] for i in range(0,3)]
+          for i in range(0,3):
+              for j in range(0,3):
+                  new_array[i][j] = array[j][i]
+          transpose_array.append(new_array)
+      return transpose_array
+    
+        
+    column_permutations = column_permutation(seed)
+    all_magic_squares = []
+    for array in column_permutations:
+        all_magic_squares.extend(row_permutation(array))
+    
+    all_magic_squares_transposed = transpose(all_magic_squares)
+   
+    all_magic_squares += all_magic_squares_transposed
+    
+    return all_magic_squares
+  
+  def cost(square, magic_square):
+      cost = 0
+      for row_square,row_magic in zip(square,magic_square):
+          for num_square, num_magic in zip(row_square,row_magic):
+              cost += abs(num_magic - num_square)    
+      return cost
+  
+  seed_given  = [[1,6,8],[9,2,4],[5,7,3]]
+  magic_squares= magic_squares_generator(seed_given)
+  
+  cost_list = []
+  for square in magic_squares:
+      cost_list.append(cost(s, square))
+  
+  minimun_cost = min(cost_list)
+  index_magic = cost_list.index(minimun_cost)
+  print(index_magic)
+  print(magic_squares[index_magic])
+  return minimun_cost
+  
+  #now you create the other magic squares just through permutation
+
+min_cost = formingMagicSquare([[4, 4, 7], [3, 1, 5], [1, 7, 9]])
+
+print(min_cost)
