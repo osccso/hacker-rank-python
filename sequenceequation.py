@@ -9,4 +9,5 @@ def permutationEquation(p):
         index_of_x =p.index(p_element)+1 
         y = p.index(index_of_x) + 1
         y_list.append(y)
+    return y_list
     
