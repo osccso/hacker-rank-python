@@ -67,6 +67,7 @@ def combinations(k, n):
     #combination's list 
     list_combinations= []
     #generate all combinations
+    
     while any(status) or list_combinations[-1] != [4, 5, 6, 7]:
         list_combinations.append(list(map(n.__getitem__,indexes)))
         next_iteration()
