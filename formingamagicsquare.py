@@ -97,6 +97,6 @@ def formingMagicSquare(s):
   
   #now you create the other magic squares just through permutation
 
-min_cost = formingMagicSquare([[4, 4, 7], [3, 1, 5], [1, 7, 9]])
+min_cost = formingMagicSquare([[2, 9, 8], [4, 2, 7], [5, 6, 7]])
 
 print(min_cost)
